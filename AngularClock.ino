@@ -336,7 +336,14 @@ void setMeter(int meter, int value){
       delay(METER_WAIT);
     }
   }
-  analogWrite(meter,value);
+  
+  if(value > 255){ // this can happen because of something wonky during calibration?
+    analogWrite(meter,255);
+  }
+  else{
+    analogWrite(meter,value);
+  }
+  
   oldMeterValue[meter] = value;
 }
 
